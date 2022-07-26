@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <name>project to demonstrated bug</name>
+  <groupId>org.rls</groupId>
+  <artifactId>cwbug</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+
+  <properties>
+      <jboss.version>27.0.0.Alpha4-SNAPSHOT</jboss.version>
+      <!-- common filename part -->
+      <jbws-testsuite-default-base>jbws-testsuite-default</jbws-testsuite-default-base>
+  </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>create-server-config</id>
+                        <phase>pre-integration-test</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <copy overwrite="true"
+                                      file="${jboss.home}/standalone/configuration/standalone.xml"
+                                      tofile="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml" />
+                                <propertyfile file="${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties">
+                                    <!-- rls tmp
+                                  <entry key="testResourcesDir" value="&quot;${project.build.directory}/test-resources&quot;"/>
+                                   -->
+                                    <entry key="testResourcesDir" value="${basedir}/src/test/resources"/>
+                                </propertyfile>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>4.0.0.Alpha2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.wildfly.core</groupId>
+                        <artifactId>wildfly-controller-client</artifactId>
+                        <version>17.0.1.Final</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>jbws-testsuite-default config-server</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>execute-commands</goal>
+                        </goals>
+                        <configuration>
+                            <offline>true</offline>
+                            <scripts>
+                                <script>${basedir}/src/test/cli/${jbws-testsuite-default-base}-elytron.cli</script>
+                            </scripts>
+                            <propertiesFiles>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties</propertiesFiles>
+                            <jboss-home>${jboss.home}</jboss-home>
+                            <stdout>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.log</stdout>
+                            <system-properties>
+                                <enableServerLoggingToConsole-prop>${enableServerLoggingToConsole}</enableServerLoggingToConsole-prop>
+                            </system-properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>Local</id>
+            <properties>
+                <jboss.home>${server.home}</jboss.home>
+            </properties>
+        </profile>
+        <profile>
+            <id>wildfly2700</id>
+            <properties>
+                <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
+            </properties>
+        </profile>
+    </profiles>
+</project>
