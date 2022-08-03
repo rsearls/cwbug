@@ -30,25 +30,20 @@
                                 <taskdef resource="net/sf/antcontrib/antcontrib.properties"
                                          classpathref="maven.plugin.classpath"/>
 
-                                <propertyregex property="WINtestResourcesDir"
-                                               input="${basedir}/src/test/resources"
+                                <propertyregex property="value-testResourcesDir"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
                                                regexp="\\"
                                                replace="\\\"
                                                global="true" />
 
                                 <propertyfile file="${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties">
-                                    <!-- rls tmp
-                                  <entry key="testResourcesDir" value="&quot;${project.build.directory}/test-resources&quot;"/>
-
-                                    <entry key="testResourcesDir" value="${basedir}/src/test/resources"/>
-                                    -->
-                                    <entry key="testResourcesDir" value="${WINtestResourcesDir}"/>
-                                    <!-- <entry key="WINtest" value="${WINtest}"/> rls -->
+                                    <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
                                 </propertyfile>
-
+                                <!-- #############
                                 <copy overwrite="true"
                                       file="${jboss.home}/standalone/configuration/standalone.xml"
                                       tofile="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml" />
+                                ############ -->
                             </target>
                         </configuration>
                     </execution>
@@ -67,6 +62,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <!-- ############################ rls
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
@@ -100,6 +96,7 @@
                     </execution>
                 </executions>
             </plugin>
+            ############################ -->
         </plugins>
     </build>
 
@@ -113,7 +110,7 @@
         <profile>
             <id>wildfly2700</id>
             <properties>
-                <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
+                <jboss.home>${project.basedir}/wildfly/ee-dist/target/wildfly-${jboss.version}</jboss.home>
             </properties>
         </profile>
     </profiles>
