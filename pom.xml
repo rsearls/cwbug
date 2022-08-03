@@ -30,20 +30,50 @@
                                 <taskdef resource="net/sf/antcontrib/antcontrib.properties"
                                          classpathref="maven.plugin.classpath"/>
 
-                                <propertyregex property="value-testResourcesDir"
+                                <propertyregex property="unix-testResourcesDir"
                                                input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
+                                               regexp="/"
+                                               replace="\\\\"
+                                               global="true" />
+                                <!-- ################
+                                <propertyregex property="win-testResourcesDir"
+                                               input="${unix-testResourcesDir}"
                                                regexp="\\"
                                                replace="\\\"
                                                global="true" />
-
+                                <propertyregex property="local-testResourcesDir"
+                                               input="/src/test/modules/testsuite/cxf-tests/target/"
+                                               regexp="/"
+                                               replace="\\\\"
+                                               global="true" />
+                                <property name="pName" value="${local-testResourcesDir}"/>
+                                <echo message="local-testResourcesDir: ${pName}" />
+                                #################-->
+                                <propertyregex property="value-testResourcesDir"
+                                               input="${unix-testResourcesDir}"
+                                               regexp="\\"
+                                               replace="\\\"
+                                               global="true" />
+                                <!-- #################
+                                <propertyregex property="base-testResourcesDir"
+                                               input="${basedir}"
+                                               regexp="\\"
+                                               replace="\\\"
+                                               global="true" />
+                                <echo message="base-testResourcesDir: ${base-testResourcesDir}" />
+                                ############## -->
                                 <propertyfile file="${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties">
                                     <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
+                                    <!-- ###############
+                                    <entry key="local-testResourcesDir" value="${local-testResourcesDir}"/>
+                                    <entry key="base-testResourcesDir" value="${base-testResourcesDir}"/>
+                                    <entry key="win-testResourcesDir" value="${win-testResourcesDir}"/>
+                                    ################## -->
+
                                 </propertyfile>
-                                <!-- #############
                                 <copy overwrite="true"
                                       file="${jboss.home}/standalone/configuration/standalone.xml"
                                       tofile="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml" />
-                                ############ -->
                             </target>
                         </configuration>
                     </execution>
@@ -62,7 +92,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- ############################ rls
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
@@ -96,7 +125,6 @@
                     </execution>
                 </executions>
             </plugin>
-            ############################ -->
         </plugins>
     </build>
 
