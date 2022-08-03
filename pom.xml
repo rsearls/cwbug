@@ -35,45 +35,40 @@
                                                regexp="/"
                                                replace="\\\\"
                                                global="true" />
-                                <!-- ################
-                                <propertyregex property="win-testResourcesDir"
-                                               input="${unix-testResourcesDir}"
-                                               regexp="\\"
-                                               replace="\\\"
-                                               global="true" />
-                                <propertyregex property="local-testResourcesDir"
-                                               input="/src/test/modules/testsuite/cxf-tests/target/"
-                                               regexp="/"
-                                               replace="\\\\"
-                                               global="true" />
-                                <property name="pName" value="${local-testResourcesDir}"/>
-                                <echo message="local-testResourcesDir: ${pName}" />
-                                #################-->
+
                                 <propertyregex property="value-testResourcesDir"
                                                input="${unix-testResourcesDir}"
                                                regexp="\\"
                                                replace="\\\"
                                                global="true" />
-                                <!-- #################
-                                <propertyregex property="base-testResourcesDir"
-                                               input="${basedir}"
+
+                                <propertyfile file="${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties">
+                                    <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
+                                </propertyfile>
+
+                                <propertyregex property="unix-in-standalone"
+                                               input="${jboss.home}/standalone/configuration/standalone.xml"
+                                               regexp="/"
+                                               replace="\\\\"
+                                               global="true" />
+                                <propertyregex property="value-in-standalone"
+                                               input="${unix-in-standalone}"
                                                regexp="\\"
                                                replace="\\\"
                                                global="true" />
-                                <echo message="base-testResourcesDir: ${base-testResourcesDir}" />
-                                ############## -->
-                                <propertyfile file="${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties">
-                                    <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
-                                    <!-- ###############
-                                    <entry key="local-testResourcesDir" value="${local-testResourcesDir}"/>
-                                    <entry key="base-testResourcesDir" value="${base-testResourcesDir}"/>
-                                    <entry key="win-testResourcesDir" value="${win-testResourcesDir}"/>
-                                    ################## -->
-
-                                </propertyfile>
+                                <propertyregex property="unix-out-standalone"
+                                               input="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml"
+                                               regexp="/"
+                                               replace="\\\\"
+                                               global="true" />
+                                <propertyregex property="value-out-standalone"
+                                               input="${unix-out-standalone}"
+                                               regexp="\\"
+                                               replace="\\\"
+                                               global="true" />
                                 <copy overwrite="true"
-                                      file="${jboss.home}/standalone/configuration/standalone.xml"
-                                      tofile="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml" />
+                                      file="${unix-in-standalone}"
+                                      tofile="${unix-out-standalone}" />
                             </target>
                         </configuration>
                     </execution>
