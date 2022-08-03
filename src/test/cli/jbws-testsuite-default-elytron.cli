@@ -6,7 +6,7 @@ embed-server --std-out=echo --server-config=jbws-testsuite-default.xml
 set testResourcesDir=${testResourcesDir}
 
 ./subsystem=elytron/properties-realm=JBossWS \
-   :add(users-properties={path=$testResourcesDir/jaxws/samples/jbossws-users.properties, plain-text=true}, \
+   :add(users-properties={path=$testResourcesDir/test-resources/jaxws/samples/wsse/policy/jaas/ejb-digest/META-INF/jbossws-users.properties, plain-text=true}, \
    groups-properties={path=$testResourcesDir/jaxws/samples/jbossws-roles.properties})
 
 stop-embedded-server

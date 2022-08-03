@@ -30,20 +30,14 @@
                                 <taskdef resource="net/sf/antcontrib/antcontrib.properties"
                                          classpathref="maven.plugin.classpath"/>
 
-                                <propertyregex property="WINtestResourcesDir"
-                                               input="${basedir}/src/test/resources"
+                                <propertyregex property="value-testResourcesDir"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
                                                regexp="\\"
                                                replace="\\\"
                                                global="true" />
 
                                 <propertyfile file="${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties">
-                                    <!-- rls tmp
-                                  <entry key="testResourcesDir" value="&quot;${project.build.directory}/test-resources&quot;"/>
-
-                                    <entry key="testResourcesDir" value="${basedir}/src/test/resources"/>
-                                    -->
-                                    <entry key="testResourcesDir" value="${WINtestResourcesDir}"/>
-                                    <!-- <entry key="WINtest" value="${WINtest}"/> rls -->
+                                    <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
                                 </propertyfile>
 
                                 <copy overwrite="true"
