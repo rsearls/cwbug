@@ -78,6 +78,8 @@
                                     <entry key="jboss.home" value="${jboss.home}"/>
                                     <entry key="value-in-standalone" value="${value-in-standalone}"/>
                                     <entry key="value-out-standalone" value="${value-out-standalone}"/>
+                                    <entry key="basedir" value="${basedir}"/>
+
                                 </propertyfile>
                                 <!-- ####### rls
                                 <copy overwrite="true"
