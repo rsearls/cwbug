@@ -79,10 +79,14 @@
                                     <entry key="value-in-standalone" value="${value-in-standalone}"/>
                                     <entry key="value-out-standalone" value="${value-out-standalone}"/>
                                 </propertyfile>
-
+                                <!-- ####### rls
                                 <copy overwrite="true"
                                       file="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/standalone.xml"
                                       tofile="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/${jbws-testsuite-default-base}.xml" /> <!-- rls debug -->
+                                ######## -->
+                                <copy overwrite="true"
+                                      file=".\wildfly\ee-9\dist\target\wildfly-preview-27.0.0.Alpha4-SNAPSHOT\standalone\configuration\standalone.xml"
+                                      tofile=".\wildfly\ee-9\dist\target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT\standalone\configuration\${jbws-testsuite-default-base}.xml" /> <!-- rls debug -->
 
                                 <copy overwrite="true"
                                       file="${value-in-standalone}"
