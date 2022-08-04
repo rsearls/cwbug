@@ -60,7 +60,7 @@
                                 <propertyregex property="value-out-standalone"
                                                input="${unix-out-standalone}"
                                                regexp="\\"
-                                               replace="\\\\\\\\"
+                                               replace="\\\"
                                                global="true" />
 
                                 <propertyregex property="unix-project.build.directory"
@@ -75,14 +75,14 @@
                                     <entry key="value-in-standalone" value="${value-in-standalone}"/>
                                     <entry key="value-out-standalone" value="${value-out-standalone}"/>
                                     ########## -->
-                                    <entry key="jboss-home" value="${${jboss.home}}"/>
-                                    <entry key="unix-in-standalone" value="${unix-in-standalone}"/>
-                                    <entry key="unix-out-standalone" value="${unix-out-standalone}"/>
+                                    <entry key="jboss-home" value="${jboss.home}"/>
+                                    <entry key="value-in-standalone" value="${value-in-standalone}"/>
+                                    <entry key="value-out-standalone" value="${value-out-standalone}"/>
                                 </propertyfile>
 
                                 <copy overwrite="true"
-                                      file="${unix-in-standalone}"
-                                      tofile="${unix-out-standalone}" />
+                                      file="${value-in-standalone}"
+                                      tofile="${value-out-standalone}" />
                             </target>
                         </configuration>
                     </execution>
