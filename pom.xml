@@ -82,7 +82,7 @@
                                 <!-- ####### rls
                                 <copy overwrite="true"
                                       file="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/standalone.xml"
-                                      tofile="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/${jbws-testsuite-default-base}.xml" /> <!-- rls debug -->
+                                      tofile="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/${jbws-testsuite-default-base}.xml" />
                                 ######## -->
                                 <copy overwrite="true"
                                       file=".\wildfly\ee-9\dist\target\wildfly-preview-27.0.0.Alpha4-SNAPSHOT\standalone\configuration\standalone.xml"
