@@ -145,7 +145,7 @@
         <profile>
             <id>wildfly2700</id>
             <properties>
-                <jboss.home>${project.basedir}/wildfly/ee-dist/target/wildfly-${jboss.version}</jboss.home>
+                <jboss.home>${project.basedir}/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
             </properties>
         </profile>
     </profiles>
