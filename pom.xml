@@ -69,9 +69,20 @@
                                                replace="\\\"
                                                global="true" />
 
+
+                                <propertyregex property="FORMAT-unix-testResourcesDir"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
+                                               regexp="\\"
+                                               replace="/"
+                                               global="true" />
+
                                 <propertyfile file="${unix-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
-                                   <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/>
-                                    <!-- <entry key="testResourcesDir" value="${value-testResourcesDir}"/>  -->
+                                    <!--
+                                     <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/>
+                                     <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
+                                     -->
+                                     <entry key="testResourcesDir" value="&quot;${FORMAT-unix-testResourcesDir}&quot;"/>
+
                                  </propertyfile>
 
                                  <copy overwrite="true"
