@@ -52,7 +52,7 @@ jobs:
         run: cat ./target/jbws-testsuite-default-elytron-CLI.log
       - name: ls prop file
         if: ${{ always() }}
-        run: ls .\src\test\modules\testsuite\cxf-tests\target\test-resources\jaxws\samples\wsse\policy\jaas\ejb-digest\META-INF\jbossws-users.properties
+        run: ls .\src\test\modules\testsuite\cxf-tests\target\test-resources
       - name: Publish Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
