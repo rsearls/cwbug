@@ -47,6 +47,9 @@ jobs:
       - name: debug file contents
         if: ${{ always() }}
         run: cat ./target/jbws-testsuite-default-elytron-CLI.properties
+      - name: CLI LOG contents
+        if: ${{ always() }}
+        run: cat ./target/jbws-testsuite-default-elytron-CLI.log
       - name: Publish Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
