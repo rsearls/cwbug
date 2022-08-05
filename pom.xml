@@ -31,7 +31,7 @@
                                          classpathref="maven.plugin.classpath"/>
 
                                 <propertyregex property="unix-testResourcesDir"
-                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target"
                                                regexp="/"
                                                replace="\\\\"
                                                global="true" />
@@ -71,7 +71,7 @@
 
 
                                 <propertyregex property="FORMAT-unix-testResourcesDir"
-                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target"
                                                regexp="\\"
                                                replace="/"
                                                global="true" />
