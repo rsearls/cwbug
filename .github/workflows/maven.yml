@@ -44,9 +44,12 @@ jobs:
       - name: Build with Maven Java ${{ matrix.java }} on WildFly ${{ matrix.wildfly-version }}
         run: |
           mvn -s ./.m2-settings.xml -fae -P${{ matrix.wildfly-version }} clean install
-      - name: Dir Look
+      - name: Dir Look 1
         if: ${{ always() }}
-        run: ls wildfly\dist\target
+        run: ls wildfly\dist
+      - name: Dir Look 2
+        if: ${{ always() }}
+        run: ls wildfly\ee-9\dist\target
       - name: debug file contents
         if: ${{ always() }}
         run: cat ./target/jbws-testsuite-default-elytron-CLI.properties
