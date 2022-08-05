@@ -70,7 +70,8 @@
                                                global="true" />
 
                                 <propertyfile file="${unix-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
-                                    <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/>
+                                   <!-- <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/> -->
+                                    <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
                                 </propertyfile>
 
                                 <copy overwrite="true"

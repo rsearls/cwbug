@@ -43,7 +43,7 @@ jobs:
         run: mvn -s ../.m2-settings.xml -DskipTests=true '-Denforcer.skip=true' -Prelease clean install
       - name: Build with Maven Java ${{ matrix.java }} on WildFly ${{ matrix.wildfly-version }}
         run: |
-          mvn -s ./.m2-settings.xml -fae -X --log-file ./target/wildfly-maven-plugin.log -P${{ matrix.wildfly-version }} clean install
+          mvn -s ./.m2-settings.xml -fae -Dorg.slf4j.simpleLogger.defaultLogLevel=debug -P${{ matrix.wildfly-version }} clean install
       - name: debug file contents
         if: ${{ always() }}
         run: cat ./target/jbws-testsuite-default-elytron-CLI.properties
