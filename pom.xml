@@ -71,25 +71,8 @@
 
                                 <propertyfile file="${unix-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
                                     <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
-                                    <!-- ########## rls
-                                    <entry key="value-in-standalone" value="${value-in-standalone}"/>
-                                    <entry key="value-out-standalone" value="${value-out-standalone}"/>
-                                    ########## -->
-                                    <entry key="jboss.home" value="${jboss.home}"/>
-                                    <entry key="value-in-standalone" value="${value-in-standalone}"/>
-                                    <entry key="value-out-standalone" value="${value-out-standalone}"/>
-                                    <entry key="basedir" value="${basedir}"/>
-
                                 </propertyfile>
-                                <!-- ####### rls
-                                <copy overwrite="true"
-                                      file="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/standalone.xml"
-                                      tofile="./wildfly/ee-9/dist/target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT/standalone/configuration/${jbws-testsuite-default-base}.xml" />
 
-                                <copy overwrite="true"
-                                      file=".\wildfly\ee-9\dist\target\wildfly-preview-27.0.0.Alpha4-SNAPSHOT\standalone\configuration\standalone.xml"
-                                      tofile=".\wildfly\ee-9\dist\target/wildfly-preview-27.0.0.Alpha4-SNAPSHOT\standalone\configuration\${jbws-testsuite-default-base}.xml" />
-                                ######## -->
                                 <copy overwrite="true"
                                       file="${value-in-standalone}"
                                       tofile="${value-out-standalone}" />
@@ -157,10 +140,7 @@
         <profile>
             <id>wildfly2700</id>
             <properties>
-                <!-- ### rls
                 <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
-                ### -->
-                <jboss.home>${project.basedir}/wildfly/dist/target/wildfly-${jboss.version}</jboss.home>
             </properties>
         </profile>
     </profiles>
