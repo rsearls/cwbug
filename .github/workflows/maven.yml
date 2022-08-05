@@ -40,7 +40,7 @@ jobs:
           distribution: 'adopt'
       - name: Build WFLY
         working-directory: ./wildfly
-        run: mvn -s ../.m2-settings.xml -DskipTests=true '-Denforcer.skip=true' clean
+        run: mvn -s ../.m2-settings.xml -DskipTests=true '-Denforcer.skip=true' -Prelease clean install
       - name: Build with Maven Java ${{ matrix.java }} on WildFly ${{ matrix.wildfly-version }}
         run: |
           mvn -s ./.m2-settings.xml -fae -P${{ matrix.wildfly-version }} clean install
