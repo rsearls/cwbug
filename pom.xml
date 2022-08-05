@@ -70,79 +70,79 @@
                                                global="true" />
 
                                 <propertyfile file="${unix-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
-                                   <!-- <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/> -->
-                                    <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
-                                </propertyfile>
+                                   <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/>
+                                    <!-- <entry key="testResourcesDir" value="${value-testResourcesDir}"/>  -->
+                                 </propertyfile>
 
-                                <copy overwrite="true"
-                                      file="${value-in-standalone}"
-                                      tofile="${value-out-standalone}" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>ant-contrib</groupId>
-                        <artifactId>ant-contrib</artifactId>
-                        <version>1.0b3</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>ant</groupId>
-                                <artifactId>ant</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>4.0.0.Alpha2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.wildfly.core</groupId>
-                        <artifactId>wildfly-controller-client</artifactId>
-                        <version>17.0.1.Final</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>jbws-testsuite-default config-server</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>execute-commands</goal>
-                        </goals>
-                        <configuration>
-                            <offline>true</offline>
-                            <scripts>
-                                <script>${basedir}/src/test/cli/${jbws-testsuite-default-base}-elytron.cli</script>
-                            </scripts>
-                            <propertiesFiles>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties</propertiesFiles>
-                            <jboss-home>${jboss.home}</jboss-home>
-                            <stdout>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.log</stdout>
-                            <system-properties>
-                                <enableServerLoggingToConsole-prop>${enableServerLoggingToConsole}</enableServerLoggingToConsole-prop>
-                            </system-properties>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+                                 <copy overwrite="true"
+                                       file="${value-in-standalone}"
+                                       tofile="${value-out-standalone}" />
+                             </target>
+                         </configuration>
+                     </execution>
+                 </executions>
+                 <dependencies>
+                     <dependency>
+                         <groupId>ant-contrib</groupId>
+                         <artifactId>ant-contrib</artifactId>
+                         <version>1.0b3</version>
+                         <exclusions>
+                             <exclusion>
+                                 <groupId>ant</groupId>
+                                 <artifactId>ant</artifactId>
+                             </exclusion>
+                         </exclusions>
+                     </dependency>
+                 </dependencies>
+             </plugin>
+             <plugin>
+                 <groupId>org.wildfly.plugins</groupId>
+                 <artifactId>wildfly-maven-plugin</artifactId>
+                 <version>4.0.0.Alpha2</version>
+                 <dependencies>
+                     <dependency>
+                         <groupId>org.wildfly.core</groupId>
+                         <artifactId>wildfly-controller-client</artifactId>
+                         <version>17.0.1.Final</version>
+                     </dependency>
+                 </dependencies>
+                 <executions>
+                     <execution>
+                         <id>jbws-testsuite-default config-server</id>
+                         <phase>pre-integration-test</phase>
+                         <goals>
+                             <goal>execute-commands</goal>
+                         </goals>
+                         <configuration>
+                             <offline>true</offline>
+                             <scripts>
+                                 <script>${basedir}/src/test/cli/${jbws-testsuite-default-base}-elytron.cli</script>
+                             </scripts>
+                             <propertiesFiles>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties</propertiesFiles>
+                             <jboss-home>${jboss.home}</jboss-home>
+                             <stdout>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.log</stdout>
+                             <system-properties>
+                                 <enableServerLoggingToConsole-prop>${enableServerLoggingToConsole}</enableServerLoggingToConsole-prop>
+                             </system-properties>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>
+         </plugins>
+     </build>
 
-    <profiles>
-        <profile>
-            <id>Local</id>
-            <properties>
-                <jboss.home>${server.home}</jboss.home>
-            </properties>
-        </profile>
-        <profile>
-            <id>wildfly2700</id>
-            <properties>
-                <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
-            </properties>
-        </profile>
-    </profiles>
-</project>
+     <profiles>
+         <profile>
+             <id>Local</id>
+             <properties>
+                 <jboss.home>${server.home}</jboss.home>
+             </properties>
+         </profile>
+         <profile>
+             <id>wildfly2700</id>
+             <properties>
+                 <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
+             </properties>
+         </profile>
+     </profiles>
+ </project>
