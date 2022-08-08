@@ -4,7 +4,7 @@
 **/derby.log
 /ant.properties
 /clipboard.*
-**/target
+## **/target
 **/.settings
 **/.classpath
 **/.project

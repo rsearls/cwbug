@@ -39,8 +39,8 @@
                                 <propertyregex property="value-testResourcesDir"
                                                input="${unix-testResourcesDir}"
                                                regexp="\\"
-                                               replace="\\\\\\\\"
-                                               global="true" />
+                                               replace="\\\\\\\\\\\\\\\\"
+                                               global="true" />  <!-- orig escapes replace="\\\\\\\\" -->
 
                                 <propertyregex property="unix-in-standalone"
                                                input="${jboss.home}/standalone/configuration/standalone.xml"
