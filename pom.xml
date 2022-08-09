@@ -9,7 +9,7 @@
   
 
   <properties>
-      <jboss.version>27.0.0.Alpha4-SNAPSHOT</jboss.version>
+      <jboss.version>27.0.0.Alpha5-SNAPSHOT</jboss.version>
       <!-- common filename part -->
       <jbws-testsuite-default-base>jbws-testsuite-default</jbws-testsuite-default-base>
   </properties>
