@@ -45,13 +45,14 @@
                                 <propertyregex property="unix-in-standalone"
                                                input="${jboss.home}/standalone/configuration/standalone.xml"
                                                regexp="/"
-                                               replace="\\\\"
+                                               replace="\\\"
                                                global="true" />
                                 <propertyregex property="value-in-standalone"
                                                input="${unix-in-standalone}"
                                                regexp="\\"
-                                               replace="\\\"
-                                               global="true" />
+                                               replace="\\\\\\\\"
+                                               global="true" /> <!-- orig replace="\\\" -->
+
                                 <propertyregex property="unix-out-standalone"
                                                input="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml"
                                                regexp="/"
@@ -60,8 +61,8 @@
                                 <propertyregex property="value-out-standalone"
                                                input="${unix-out-standalone}"
                                                regexp="\\"
-                                               replace="\\\"
-                                               global="true" />
+                                               replace="\\\\\\\\"
+                                               global="true" /> <!-- orig replace="\\\" -->
 
                                 <propertyregex property="unix-project.build.directory"
                                                input="${project.build.directory}/"
@@ -92,14 +93,15 @@
                                     <entry key="value-testResourcesDir" value="${value-testResourcesDir}"/>
 
                                  </propertyfile>
-                                <!-- rls ###
+
                                  <copy overwrite="true"
                                        file="${value-in-standalone}"
                                        tofile="${value-out-standalone}" />
-                                ### -->
+                                <!-- rls ###
                                 <copy overwrite="true"
                                       file="${unix-in-standalone}"
                                       tofile="${unix-out-standalone}" />
+                                ### -->
                              </target>
                          </configuration>
                      </execution>
