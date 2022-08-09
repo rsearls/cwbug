@@ -68,6 +68,11 @@
                                                regexp="/"
                                                replace="\\\"
                                                global="true" />
+                                <propertyregex property="value-project.build.directory"
+                                               input="${unix-project.build.directory}"
+                                               regexp="\\"
+                                               replace="\\\"
+                                               global="true" />
 
 
                                 <propertyregex property="FORMAT-unix-testResourcesDir"
@@ -76,7 +81,7 @@
                                                replace="/"
                                                global="true" />
 
-                                <propertyfile file="${unix-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
+                                <propertyfile file="${value-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
                                     <!--
                                      <entry key="testResourcesDir" value="&quot;${value-testResourcesDir}&quot;"/>
                                      <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
@@ -84,11 +89,17 @@
                                      <entry key="testResourcesDir" value="&quot;${FORMAT-unix-testResourcesDir}&quot;"/>
                                     <entry key="{value-in-standalone" value="${{value-in-standalone}"/>
                                     <entry key="value-out-standalone" value="${value-out-standalone}"/>
-                                 </propertyfile>
+                                    <entry key="value-testResourcesDir" value="${value-testResourcesDir}"/>
 
+                                 </propertyfile>
+                                <!-- rls ###
                                  <copy overwrite="true"
                                        file="${value-in-standalone}"
                                        tofile="${value-out-standalone}" />
+                                ### -->
+                                <copy overwrite="true"
+                                      file="${unix-in-standalone}"
+                                      tofile="${unix-out-standalone}" />
                              </target>
                          </configuration>
                      </execution>
