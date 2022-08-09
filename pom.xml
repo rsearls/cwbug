@@ -87,7 +87,7 @@
                                      <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
                                      -->
                                      <entry key="testResourcesDir" value="&quot;${FORMAT-unix-testResourcesDir}&quot;"/>
-                                    <entry key="{value-in-standalone" value="${{value-in-standalone}"/>
+                                    <entry key="value-in-standalone" value="${value-in-standalone}"/>
                                     <entry key="value-out-standalone" value="${value-out-standalone}"/>
                                     <entry key="value-testResourcesDir" value="${value-testResourcesDir}"/>
 
