@@ -9,7 +9,7 @@
   
 
   <properties>
-      <jboss.version>27.0.0.Alpha4-SNAPSHOT</jboss.version>
+      <jboss.version>27.0.0.Alpha5-SNAPSHOT</jboss.version>
       <!-- common filename part -->
       <jbws-testsuite-default-base>jbws-testsuite-default</jbws-testsuite-default-base>
   </properties>
@@ -31,7 +31,7 @@
                                          classpathref="maven.plugin.classpath"/>
 
                                 <propertyregex property="unix-testResourcesDir"
-                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target/"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target"
                                                regexp="/"
                                                replace="\\\\"
                                                global="true" />
@@ -39,19 +39,20 @@
                                 <propertyregex property="value-testResourcesDir"
                                                input="${unix-testResourcesDir}"
                                                regexp="\\"
-                                               replace="\\\\\\\\"
-                                               global="true" />
+                                               replace="\\\\\\\\\\\\\\\\"
+                                               global="true" />  <!-- orig escapes replace="\\\\\\\\" -->
 
                                 <propertyregex property="unix-in-standalone"
                                                input="${jboss.home}/standalone/configuration/standalone.xml"
                                                regexp="/"
-                                               replace="\\\\"
+                                               replace="\\\"
                                                global="true" />
                                 <propertyregex property="value-in-standalone"
                                                input="${unix-in-standalone}"
                                                regexp="\\"
-                                               replace="\\\"
-                                               global="true" />
+                                               replace="\\\\\\\\"
+                                               global="true" /> <!-- orig replace="\\\" -->
+
                                 <propertyregex property="unix-out-standalone"
                                                input="${jboss.home}/standalone/configuration/${jbws-testsuite-default-base}.xml"
                                                regexp="/"
@@ -60,88 +61,108 @@
                                 <propertyregex property="value-out-standalone"
                                                input="${unix-out-standalone}"
                                                regexp="\\"
-                                               replace="\\\"
-                                               global="true" />
+                                               replace="\\\\\\\\"
+                                               global="true" /> <!-- orig replace="\\\" -->
 
                                 <propertyregex property="unix-project.build.directory"
                                                input="${project.build.directory}/"
                                                regexp="/"
                                                replace="\\\"
                                                global="true" />
+                                <propertyregex property="value-project.build.directory"
+                                               input="${unix-project.build.directory}"
+                                               regexp="\\"
+                                               replace="\\\"
+                                               global="true" />
 
-                                <propertyfile file="${unix-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
+
+                                <propertyregex property="FORMAT-unix-testResourcesDir"
+                                               input="${basedir}/src/test/modules/testsuite/cxf-tests/target"
+                                               regexp="\\"
+                                               replace="/"
+                                               global="true" />
+
+                                <propertyfile file="${value-project.build.directory}${jbws-testsuite-default-base}-elytron-CLI.properties">
+                                    <!-- ##
+                                    <entry key="testResourcesDir" value="&quot;${FORMAT-unix-testResourcesDir}&quot;"/>
+                                    ## -->
                                     <entry key="testResourcesDir" value="${value-testResourcesDir}"/>
-                                </propertyfile>
+                                    <entry key="value-in-standalone" value="${value-in-standalone}"/>
+                                    <entry key="value-out-standalone" value="${value-out-standalone}"/>
+                                    <entry key="value-testResourcesDir" value="${value-testResourcesDir}"/>
 
-                                <copy overwrite="true"
-                                      file="${value-in-standalone}"
-                                      tofile="${value-out-standalone}" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>ant-contrib</groupId>
-                        <artifactId>ant-contrib</artifactId>
-                        <version>1.0b3</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>ant</groupId>
-                                <artifactId>ant</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>4.0.0.Alpha2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.wildfly.core</groupId>
-                        <artifactId>wildfly-controller-client</artifactId>
-                        <version>17.0.1.Final</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>jbws-testsuite-default config-server</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>execute-commands</goal>
-                        </goals>
-                        <configuration>
-                            <offline>true</offline>
-                            <scripts>
-                                <script>${basedir}/src/test/cli/${jbws-testsuite-default-base}-elytron.cli</script>
-                            </scripts>
-                            <propertiesFiles>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties</propertiesFiles>
-                            <jboss-home>${jboss.home}</jboss-home>
-                            <stdout>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.log</stdout>
-                            <system-properties>
-                                <enableServerLoggingToConsole-prop>${enableServerLoggingToConsole}</enableServerLoggingToConsole-prop>
-                            </system-properties>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+                                 </propertyfile>
 
-    <profiles>
-        <profile>
-            <id>Local</id>
-            <properties>
-                <jboss.home>${server.home}</jboss.home>
-            </properties>
-        </profile>
-        <profile>
-            <id>wildfly2700</id>
-            <properties>
-                <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
-            </properties>
-        </profile>
-    </profiles>
-</project>
+                                 <copy overwrite="true"
+                                       file="${value-in-standalone}"
+                                       tofile="${value-out-standalone}" />
+
+                             </target>
+                         </configuration>
+                     </execution>
+                 </executions>
+                 <dependencies>
+                     <dependency>
+                         <groupId>ant-contrib</groupId>
+                         <artifactId>ant-contrib</artifactId>
+                         <version>1.0b3</version>
+                         <exclusions>
+                             <exclusion>
+                                 <groupId>ant</groupId>
+                                 <artifactId>ant</artifactId>
+                             </exclusion>
+                         </exclusions>
+                     </dependency>
+                 </dependencies>
+             </plugin>
+             <plugin>
+                 <groupId>org.wildfly.plugins</groupId>
+                 <artifactId>wildfly-maven-plugin</artifactId>
+                 <version>4.0.0.Alpha2</version>
+                 <dependencies>
+                     <dependency>
+                         <groupId>org.wildfly.core</groupId>
+                         <artifactId>wildfly-controller-client</artifactId>
+                         <version>17.0.1.Final</version>
+                     </dependency>
+                 </dependencies>
+                 <executions>
+                     <execution>
+                         <id>jbws-testsuite-default config-server</id>
+                         <phase>pre-integration-test</phase>
+                         <goals>
+                             <goal>execute-commands</goal>
+                         </goals>
+                         <configuration>
+                             <offline>true</offline>
+                             <scripts>
+                                 <script>${basedir}/src/test/cli/${jbws-testsuite-default-base}-elytron.cli</script>
+                             </scripts>
+                             <propertiesFiles>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.properties</propertiesFiles>
+                             <jboss-home>${jboss.home}</jboss-home>
+                             <stdout>${project.build.directory}/${jbws-testsuite-default-base}-elytron-CLI.log</stdout>
+                             <system-properties>
+                                 <enableServerLoggingToConsole-prop>${enableServerLoggingToConsole}</enableServerLoggingToConsole-prop>
+                             </system-properties>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>
+         </plugins>
+     </build>
+
+     <profiles>
+         <profile>
+             <id>Local</id>
+             <properties>
+                 <jboss.home>${server.home}</jboss.home>
+             </properties>
+         </profile>
+         <profile>
+             <id>wildfly2700</id>
+             <properties>
+                 <jboss.home>${project.basedir}/wildfly/ee-9/dist/target/wildfly-preview-${jboss.version}</jboss.home>
+             </properties>
+         </profile>
+     </profiles>
+ </project>
