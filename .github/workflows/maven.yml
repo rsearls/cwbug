@@ -23,9 +23,10 @@ jobs:
       - name: Checkout cwbug
         uses: actions/checkout@v2
       - name: Checkout wildfly
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: wildfly/wildfly
+          ref: '27.0.0.Alpha3'
           path: './wildfly'
       - uses: actions/cache@v3
         with:
