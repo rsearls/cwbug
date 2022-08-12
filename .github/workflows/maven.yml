@@ -23,7 +23,7 @@ jobs:
       - name: Checkout cwbug
         uses: actions/checkout@v2
       - name: Checkout wildfly
-        if: ${{ wildfly-version == 'wildfly2700'}}
+        if: contains(matrix.wildfly-version, 'wildfly2700')
         uses: actions/checkout@v3
         with:
           repository: wildfly/wildfly
@@ -41,12 +41,12 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'adopt'
       - name: Build WFLY
-        if: ${{ wildfly-version == 'wildfly2700'}}
+        if: contains(matrix.wildfly-version, 'wildfly2700')
         working-directory: ./wildfly
         run: mvn -s ../.m2-settings.xml -DskipTests=true '-Denforcer.skip=true' -Prelease clean install
-      - name: Build with Maven Java ${{ matrix.java }} on WildFly ${{ wildfly-version }}
+      - name: Build with Maven Java ${{ matrix.java }} on WildFly ${{ matrix.wildfly-version }}
         run: |
-          mvn -s ./.m2-settings.xml -fae --define org.slf4j.simpleLogger.defaultLogLevel=debug -P${{ wildfly-version }} clean install
+          mvn -s ./.m2-settings.xml -fae --define org.slf4j.simpleLogger.defaultLogLevel=debug -P${{ matrix.wildfly-version }} clean install
       - name: debug file contents
         if: ${{ always() }}
         run: cat ./target/jbws-testsuite-default-elytron-CLI.properties
