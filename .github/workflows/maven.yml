@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout cwbug
         uses: actions/checkout@v2
-      - name: Checkout wildfly
+      - name: Checkout wildfly wildfly2700
         if: contains(matrix.wildfly-version, 'wildfly2700')
         uses: actions/checkout@v3
         with:
@@ -40,7 +40,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: 'adopt'
-      - name: Build WFLY
+      - name: Build WFLY wildfly2700
         if: contains(matrix.wildfly-version, 'wildfly2700')
         working-directory: ./wildfly
         run: mvn -s ../.m2-settings.xml -DskipTests=true '-Denforcer.skip=true' -Prelease clean install
